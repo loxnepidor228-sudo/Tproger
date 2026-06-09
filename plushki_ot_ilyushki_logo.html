@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Плюшки от Илюшки — Вкусные сладости</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #FFF8F0;
+            color: #4A3728;
+            line-height: 1.6;
+        }
+
+        /* Шапка */
+        header {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo-img {
+            width: 58px;
+            height: 58px;
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.25));
+        }
+
+        .hero-logo-img {
+            width: min(260px, 70vw);
+            height: auto;
+            object-fit: contain;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 15px;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.15));
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .cart-icon {
+            background: white;
+            color: #FF6B6B;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Герой секция */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23FFF8F0" width="1200" height="600"/><circle cx="200" cy="100" r="80" fill="%23FFE4E1" opacity="0.5"/><circle cx="800" cy="200" r="120" fill="%23FFDAB9" opacity="0.4"/><circle cx="1000" cy="400" r="100" fill="%23FFE4E1" opacity="0.5"/><circle cx="400" cy="500" r="90" fill="%23FFDAB9" opacity="0.4"/></svg>');
+            background-size: cover;
+            padding: 100px 20px;
+            text-align: center;
+            color: #4A3728;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #FF6B6B;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: #6B4423;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+        }
+
+        /* Категории */
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid #FFE4E1;
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #8B7355;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: #FF6B6B;
+            color: white;
+            border-color: #FF6B6B;
+            transform: translateY(-2px);
+        }
+
+        /* Секция товаров */
+        .products-section {
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #FF6B6B;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #FF6B6B, #FF8E53);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 220px;
+            width: 100%;
+            object-fit: cover;
+            display: block;
+            background: linear-gradient(135deg, #FFE4E1, #FFDAB9);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #FF6B6B;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .product-badge.new {
+            background: #4CAF50;
+        }
+
+        .product-badge.hit {
+            background: #FF9800;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #4A3728;
+        }
+
+        .product-desc {
+            color: #8B7355;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .product-weight {
+            color: #aaa;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #FF6B6B;
+        }
+
+        .price .old-price {
+            font-size: 1rem;
+            color: #aaa;
+            text-decoration: line-through;
+            margin-left: 8px;
+            font-weight: 400;
+        }
+
+        .btn-add {
+            background: #FF6B6B;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .btn-add:hover {
+            background: #FF5252;
+            transform: scale(1.05);
+        }
+
+        .btn-add.added {
+            background: #4CAF50;
+        }
+
+        /* Корзина */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: flex-end;
+            z-index: 200;
+            backdrop-filter: blur(5px);
+        }
+
+        .cart-overlay.active {
+            display: flex;
+        }
+
+        .cart-sidebar {
+            background: white;
+            width: 450px;
+            max-width: 100%;
+            height: 100%;
+            padding: 30px;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.3s;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+        }
+
+        .cart-overlay.active .cart-sidebar {
+            transform: translateX(0);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #FFE4E1;
+        }
+
+        .cart-header h2 {
+            color: #FF6B6B;
+            font-size: 1.8rem;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #8B7355;
+            padding: 5px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #FFF8F0;
+            border-radius: 15px;
+            align-items: center;
+        }
+
+        .cart-item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #FFE4E1, #FFDAB9);
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #FF6B6B;
+            font-weight: 600;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qty-btn {
+            background: #FFE4E1;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 700;
+            color: #FF6B6B;
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: #FF6B6B;
+            color: white;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #ccc;
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+
+        .remove-item:hover {
+            color: #FF6B6B;
+        }
+
+        .cart-total {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #FFE4E1;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-align: right;
+            color: #4A3728;
+        }
+
+        .cart-total span {
+            color: #FF6B6B;
+            font-size: 1.5rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkout-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #8B7355;
+            padding: 40px 0;
+            font-size: 1.1rem;
+        }
+
+        /* О нас */
+        .about-section {
+            background: white;
+            padding: 80px 20px;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: #6B4423;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature {
+            padding: 30px;
+            background: #FFF8F0;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            color: #FF6B6B;
+            margin-bottom: 10px;
+        }
+
+        /* Отзывы */
+        .reviews-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #FFF8F0, #FFE4E1);
+        }
+
+        .reviews-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .review-info h4 {
+            color: #4A3728;
+            margin-bottom: 5px;
+        }
+
+        .review-stars {
+            color: #FFD700;
+            font-size: 1.1rem;
+        }
+
+        .review-text {
+            color: #6B4423;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .review-date {
+            color: #aaa;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        .review-product {
+            display: inline-block;
+            background: #FFE4E1;
+            color: #FF6B6B;
+            padding: 3px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        /* Форма отзыва */
+        .review-form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .review-form-container h3 {
+            text-align: center;
+            color: #FF6B6B;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4A3728;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #FFE4E1;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: #FFF8F0;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #FF6B6B;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 10px;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .star-rating span {
+            color: #ddd;
+            transition: all 0.2s;
+        }
+
+        .star-rating span.active,
+        .star-rating span:hover {
+            color: #FFD700;
+            transform: scale(1.2);
+        }
+
+        .submit-review-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-review-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Карта */
+        .map-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #FFF8F0, #FFE4E1);
+        }
+
+        .map-address {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #6B4423;
+            margin-bottom: 30px;
+        }
+
+        #yandex-map {
+            width: 100%;
+            height: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            #yandex-map {
+                height: 300px;
+            }
+        }
+
+        /* Подвал */
+        footer {
+            background: #4A3728;
+            color: #FFDAB9;
+            padding: 50px 20px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            color: #FF8E53;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #FFDAB9;
+            text-decoration: none;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #FF8E53;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,218,185,0.2);
+            padding-top: 20px;
+            color: #8B7355;
+        }
+
+        /* Уведомление */
+        .notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 300;
+            font-weight: 600;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Модальное окно товара */
+        .product-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 250;
+            backdrop-filter: blur(5px);
+        }
+
+        .product-modal-overlay.active {
+            display: flex;
+        }
+
+        .product-modal {
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalAppear 0.3s ease;
+        }
+
+        @keyframes modalAppear {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #8B7355;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #FFE4E1, #FFDAB9);
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            color: #4A3728;
+            margin-bottom: 10px;
+        }
+
+        .modal-desc {
+            color: #6B4423;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .modal-details {
+            background: #FFF8F0;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-details p {
+            margin-bottom: 8px;
+            color: #8B7355;
+        }
+
+        .modal-details strong {
+            color: #4A3728;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #FF6B6B;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .header-logo-img {
+                width: 48px;
+                height: 48px;
+            }
+
+            .hero-logo-img {
+                width: min(190px, 80vw);
+                margin-right: 0;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .review-form-container {
+                padding: 25px;
+            }
+        }
+
+        /* Анимации */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero .logo-anim {
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo"><img src="img26.png" alt="Логотип Плюшки от Илюшки" class="header-logo-img">Плюшки от Илюшки</div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#products">Каталог</a></li>
+                        <li><a href="#reviews">Отзывы</a></li>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
+                </nav>
+                <button class="cart-icon" onclick="toggleCart()">
+                    🛒 Корзина (<span id="cart-count">0</span>)
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1><img src="img26.png" alt="Логотип Плюшки от Илюшки" class="hero-logo-img logo-anim">Плюшки от Илюшки</h1>
+            <p>Домашняя выпечка с любовью! Свежие торты, пирожные и десерты каждый день. Закажи сейчас — получи сейчас!</p>
+            <a href="#products" class="btn-primary">Смотреть каталог</a>
+        </div>
+    </section>
+
+    <!-- Каталог -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <h2 class="section-title">Наши сладости</h2>
+            
+            <div class="categories">
+                <button class="category-btn active" onclick="filterProducts('all', this)">Все</button>
+                <button class="category-btn" onclick="filterProducts('cakes', this)">🎂 Торты</button>
+                <button class="category-btn" onclick="filterProducts('pastry', this)">🥐 Выпечка</button>
+                <button class="category-btn" onclick="filterProducts('desserts', this)">🍨 Десерты</button>
+                <button class="category-btn" onclick="filterProducts('cookies', this)">🍪 Печенье</button>
+                <button class="category-btn" onclick="filterProducts('drinks', this)">☕ Напитки</button>
+            </div>
+            
+            <div class="products-grid" id="products-grid">
+                <!-- Товары добавятся через JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="reviews-section" id="reviews">
+        <div class="reviews-container">
+            <h2 class="section-title">Отзывы наших клиентов</h2>
+            
+            <div class="reviews-grid" id="reviews-grid">
+                <!-- Отзывы добавятся через JS -->
+            </div>
+
+            <div class="review-form-container">
+                <h3>✍️ Оставьте свой отзыв</h3>
+                <form id="review-form" onsubmit="submitReview(event)">
+                    <div class="form-group">
+                        <label>Ваше имя</label>
+                        <input type="text" id="review-name" placeholder="Например, Анна" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Оценка</label>
+                        <div class="star-rating" id="star-rating">
+                            <span onclick="setRating(1)">★</span>
+                            <span onclick="setRating(2)">★</span>
+                            <span onclick="setRating(3)">★</span>
+                            <span onclick="setRating(4)">★</span>
+                            <span onclick="setRating(5)">★</span>
+                        </div>
+                        <input type="hidden" id="review-rating" value="5" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Товар</label>
+                        <select id="review-product" required>
+                            <option value="">Выберите товар...</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Ваш отзыв</label>
+                        <textarea id="review-text" placeholder="Расскажите о вашем опыте..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-review-btn">Отправить отзыв ⭐</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- О нас -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="section-title">Почему выбирают нас?</h2>
+                <p>Мы печём со времен Римской Империи, используя только натуральные ингредиенты. Никаких консервантов и заменителей — только любовь и сливочное масло!</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🌾</div>
+                        <h3>Натуральные продукты</h3>
+                        <p>Только свежие ингредиенты от проверенных поставщиков</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Быстрая доставка</h3>
+                        <p>Привезём за 60 минут или вернём деньги</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">❤️</div>
+                        <h3>С любовью</h3>
+                        <p>Каждый десерт готовится вручную с душой</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🎁</div>
+                        <h3>Подарочная упаковка</h3>
+                        <p>Бесплатно упакуем в красивую коробку</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Яндекс Карта -->
+    <section class="map-section" id="map-section">
+        <div class="container">
+            <h2 class="section-title">Как нас найти</h2>
+            <p class="map-address">📍 Санкт-Петербург, ул. Пражская, 4 — ежедневно с 9:00 до 21:00</p>
+            <div id="yandex-map"></div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer id="contacts">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p>📍 Санкт-Петербург, ул. Пражская, 4</p>
+                    <p>📞 +7 (915) 981-81-62</p>
+                    <p>✉️ sokoloff2019iliya@gmail.com</p>
+                    <p>🕐 Ежедневно 9:00–21:00</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Информация</h3>
+                    <p><a href="#">Доставка и оплата</a></p>
+                    <p><a href="#">Условия возврата</a></p>
+                    <p><a href="#">Политика конфиденциальности</a></p>
+                    <p><a href="#">Вакансии</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Мы в соцсетях</h3>
+                    <p><a href="https://vk.com/kenpachi16">ВКонтакте</a></p>
+
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Плюшки от Илюшки. Все права защищены. Сделано с ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Корзина -->
+    <div class="cart-overlay" id="cart-overlay" onclick="closeCartOutside(event)">
+        <div class="cart-sidebar" onclick="event.stopPropagation()">
+            <div class="cart-header">
+                <h2>🛒 Ваша корзина</h2>
+                <button class="close-cart" onclick="toggleCart()">✕</button>
+            </div>
+            <div id="cart-items">
+                <div class="empty-cart">Корзина пуста 🥺<br>Добавьте что-нибудь вкусное!</div>
+            </div>
+            <div id="cart-footer" style="display: none;">
+                <div class="cart-total">
+                    Итого: <span id="total-price">0 ₽</span>
+                </div>
+                <button class="checkout-btn" onclick="checkout()">Оформить заказ 🚀</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно товара -->
+    <div class="product-modal-overlay" id="product-modal" onclick="closeModalOutside(event)">
+        <div class="product-modal" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeProductModal()">✕</button>
+            <img src="" alt="" class="modal-image" id="modal-image">
+            <h2 class="modal-title" id="modal-title">Название товара</h2>
+            <p class="modal-desc" id="modal-desc">Описание товара</p>
+            <div class="modal-details" id="modal-details"></div>
+            <div class="modal-footer">
+                <div class="modal-price" id="modal-price">0 ₽</div>
+                <button class="btn-add" id="modal-add-btn" onclick="addToCartFromModal()">В корзину</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомление -->
+    <div class="notification" id="notification">Товар добавлен в корзину! 🎉</div>
+
+    <script>
+        // ===== ДАННЫЕ ТОВАРОВ (24 позиции) =====
+        // Каждому товару соответствует img1.png — img24.png
+        const products = [
+            // Торты (img1 — img6)
+            { id: 1, name: "Медовик классический", price: 850, oldPrice: 950, desc: "8 слоёв нежного меда с заварным кремом", weight: "1.2 кг", category: "cakes", image: "img1.png", badge: "hit", details: "Классический русский торт из тонких медовых коржей с прослойкой из сметанно-заварного крема. Украшен крошкой из коржей и грецкими орехами." },
+            { id: 2, name: "Красный бархат", price: 1200, oldPrice: null, desc: "Шоколадный бисквит с крем-чизом", weight: "1.5 кг", category: "cakes", image: "img2.png", badge: "new", details: "Американский классический торт с насыщенным шоколадным вкусом и нежным кремом из сыра маскарпоне. Идеально подходит для праздников!" },
+            { id: 3, name: "Наполеон", price: 950, oldPrice: 1100, desc: "Хрустящее слоёное тесто с ванильным кремом", weight: "1 кг", category: "cakes", image: "img3.png", badge: null, details: "Традиционный французский торт из хрустящих слоёв теста с заварным ванильным кремом. Тающий во рту десерт для настоящих гурманов." },
+            { id: 4, name: "Чизкейк Нью-Йорк", price: 780, oldPrice: null, desc: "Классический чизкейк с ягодным соусом", weight: "900 г", category: "cakes", image: "img4.png", badge: "hit", details: "Нежнейший чизкейк на основе песочного печенья с кремом из сливочного сыра. Подаётся с домашним ягодным соусом на выбор." },
+            { id: 5, name: "Тирамису", price: 890, oldPrice: null, desc: "Итальянский десерт с маскарпоне и кофе", weight: "800 г", category: "cakes", image: "img5.png", badge: null, details: "Аутентичный итальянский десерт из пропитанных кофе савоярди с нежным кремом из маскарпоне и какао." },
+            { id: 6, name: "Птичье молоко", price: 1050, oldPrice: null, desc: "Воздушное суфле в шоколадной глазури", weight: "1.1 кг", category: "cakes", image: "img6.png", badge: "new", details: "Легендарный советский торт с воздушным суфле на агар-агаре, покрытый тёмным шоколадом. Ностальгия в каждом кусочке!" },
+
+            // Выпечка (img7 — img12)
+            { id: 7, name: "Эклеры (6 шт)", price: 650, oldPrice: null, desc: "Заварные пирожные с шоколадным кремом", weight: "360 г", category: "pastry", image: "img7.png", badge: null, details: "Классические французские эклеры из заварного теста с нежным шоколадным заварным кремом и глазурью из тёмного шоколада." },
+            { id: 8, name: "Профитроли (10 шт)", price: 550, oldPrice: null, desc: "Мини-эклеры с заварным кремом", weight: "300 г", category: "pastry", image: "img8.png", badge: null, details: "Маленькие воздушные шарики из заварного теста, начиненные ванильным заварным кремом. Идеально для чаепития!" },
+            { id: 9, name: "Круассаны (4 шт)", price: 480, oldPrice: 550, desc: "Слоёные круассаны с маслом", weight: "280 г", category: "pastry", image: "img9.png", badge: "hit", details: "Настоящие французские круассаны из слоёного теста с высоким содержанием сливочного масла. Хрустящие снаружи, мягкие внутри." },
+            { id: 10, name: "Слойка с яблоком", price: 120, oldPrice: null, desc: "Слоёное тесто с яблочной начинкой", weight: "120 г", category: "pastry", image: "img10.png", badge: null, details: "Свежая слойка из хрустящего теста с сочной яблочной начинкой и корицей. Идеальный перекус с чаем или кофе." },
+            { id: 11, name: "Булочка с корицей", price: 95, oldPrice: null, desc: "Мягкая булочка с коричной начинкой", weight: "100 г", category: "pastry", image: "img11.png", badge: null, details: "Ароматная булочка из дрожжевого теста с щедрой порцией коричной начинки и сахарной глазурью сверху." },
+            { id: 12, name: "Пирожок с вишней", price: 110, oldPrice: null, desc: "Дрожжевой пирожок с вишнёвой начинкой", weight: "110 г", category: "pastry", image: "img12.png", badge: null, details: "Пышный дрожжевой пирожок с сочной вишнёвой начинкой. Посыпан сахарной пудрой." },
+
+            // Десерты (img13 — img18)
+            { id: 13, name: "Макаруны (12 шт)", price: 1100, oldPrice: null, desc: "Ассорти из 6 вкусов", weight: "240 г", category: "desserts", image: "img13.png", badge: "new", details: "Нежнейшие французские макаруны в ассортименте: фисташка, малина, лимон, шоколад, ваниль, карамель." },
+            { id: 14, name: "Панна-котта", price: 320, oldPrice: null, desc: "Итальянский десерт с ягодным соусом", weight: "150 г", category: "desserts", image: "img14.png", badge: null, details: "Нежнейший итальянский десерт из сливок с ванилью, подаётся с домашним ягодным соусом и свежими ягодами." },
+            { id: 15, name: "Тирамису в стакане", price: 380, oldPrice: null, desc: "Порционный тирамису", weight: "200 г", category: "desserts", image: "img15.png", badge: null, details: "Индивидуальная порция классического тирамису в стакане. Удобно брать с собой!" },
+            { id: 16, name: "Шоколадный фондан", price: 450, oldPrice: null, desc: "Тёплый шоколадный десерт", weight: "180 г", category: "desserts", image: "img16.png", badge: "hit", details: "Тёплый шоколадный кекс с жидкой сердцевиной. Подаётся с ванильным мороженым и ягодами." },
+            { id: 17, name: "Фруктовый тарт", price: 520, oldPrice: null, desc: "Песочная корзинка с фруктами", weight: "200 г", category: "desserts", image: "img17.png", badge: null, details: "Хрустящая песочная корзинка с заварным кремом и сезонными свежими фруктами. Искусство на тарелке!" },
+            { id: 18, name: "Мороженое (3 шарика)", price: 280, oldPrice: null, desc: "Ассорти из 3 вкусов", weight: "200 г", category: "desserts", image: "img18.png", badge: null, details: "Домашнее мороженое ручной работы. На выбор: ваниль, шоколад, клубника, фисташка, карамель." },
+
+            // Печенье (img19 — img22)
+            { id: 19, name: "Овсяное печенье", price: 350, oldPrice: null, desc: "Классическое овсяное печенье", weight: "300 г", category: "cookies", image: "img19.png", badge: null, details: "Хрустящее овсяное печенье с изюмом и грецкими орехами. Идеально к чаю или кофе." },
+            { id: 20, name: "Шоколадное печенье", price: 380, oldPrice: null, desc: "Печенье с кусочками шоколада", weight: "280 г", category: "cookies", image: "img20.png", badge: "hit", details: "Американское шоколадное печенье с крупными кусочками тёмного шоколада. Мягкое внутри, хрустящее снаружи." },
+            { id: 21, name: "Имбирные пряники", price: 420, oldPrice: null, desc: "Ароматные имбирные пряники", weight: "250 г", category: "cookies", image: "img21.png", badge: null, details: "Ароматные пряники с имбирём, корицей и гвоздикой. Украшены глазурью вручную." },
+            { id: 22, name: "Курабье", price: 320, oldPrice: null, desc: "Песочное печенье с орехами", weight: "200 г", category: "cookies", image: "img22.png", badge: null, details: "Традиционное восточное песочное печенье с грецкими орехами и сахарной пудрой. Тает во рту!" },
+
+            // Напитки (img23 — img24)
+            { id: 23, name: "Горячий шоколад", price: 250, oldPrice: null, desc: "Насыщенный горячий шоколад", weight: "300 мл", category: "drinks", image: "img23.png", badge: null, details: "Густой горячий шоколад из бельгийского какао с натуральными сливками. Можно добавить зефирки!" },
+            { id: 24, name: "Лимонад домашний", price: 180, oldPrice: null, desc: "Домашний цитрусовый лимонад", weight: "400 мл", category: "drinks", image: "img24.png", badge: "new", details: "Освежающий домашний лимонад из натуральных лимонов, апельсинов и мяты. Без консервантов и красителей." }
+        ];
+
+        // ===== ОТЗЫВЫ =====
+        // Аватары отзывов: img25.png — img27.png (6 отзывов, 3 аватара повторяются)
+        let reviews = [
+            { id: 1, name: "Анна К.", rating: 5, product: "Медовик классический", text: "Самый вкусный медовик, который я пробовала! Коржи тонкие, крем не приторный. Заказала на день рождения мамы — все в восторге!", date: "15 мая 2026", avatar: "img25.png" },
+            { id: 2, name: "Максим П.", rating: 5, product: "Красный бархат", text: "Торт просто шедевр! Очень нежный, красивый и вкусный. Доставили вовремя, упаковка отличная.", date: "10 мая 2026", avatar: "img26.png" },
+            { id: 3, name: "Ольга С.", rating: 4, product: "Макаруны (12 шт)", text: "Макаруны восхитительные! Особенно понравились фисташковые и малиновые. Единственный минус — хотелось бы больше вкусов в ассортименте.", date: "5 мая 2026", avatar: "img27.png" },
+            { id: 4, name: "Дмитрий В.", rating: 5, product: "Шоколадный фондан", text: "Фондан — это бомба! Шоколадная сердцевина просто невероятная. Обязательно закажу ещё раз.", date: "1 мая 2026", avatar: "img25.png" },
+            { id: 5, name: "Екатерина М.", rating: 5, product: "Птичье молоко", text: "Ностальгия! Точно такой же вкус, как в детстве. Суфле воздушное, шоколадная глазурь хрустит. Спасибо, Илюшка!", date: "28 апреля 2026", avatar: "img26.png" },
+            { id: 6, name: "Иван Р.", rating: 4, product: "Круассаны (4 шт)", text: "Очень вкусные круассаны, правда хрустящие. Но один раз привезли чуть остывшими. В целом рекомендую!", date: "25 апреля 2026", avatar: "img27.png" }
+        ];
+
+        let cart = [];
+        let currentModalProduct = null;
+        let currentRating = 5;
+
+        // ===== ИНИЦИАЛИЗАЦИЯ =====
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts('all');
+            renderReviews();
+            populateProductSelect();
+        });
+
+        // ===== РЕНДЕР ТОВАРОВ =====
+        function renderProducts(category) {
+            const grid = document.getElementById('products-grid');
+            const filtered = category === 'all' ? products : products.filter(p => p.category === category);
+            
+            grid.innerHTML = filtered.map(product => `
+                <div class="product-card" onclick="openProductModal(${product.id})">
+                    <img src="${product.image}" alt="${product.name}" class="product-image" onerror="this.style.display='none'">
+                    ${product.badge ? `<span class="product-badge ${product.badge}">${product.badge === 'new' ? 'НОВИНКА' : 'ХИТ'}</span>` : ''}
+                    <div class="product-info">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-desc">${product.desc}</div>
+                        <div class="product-weight">${product.weight}</div>
+                        <div class="product-footer">
+                            <div class="price">
+                                ${product.price} ₽
+                                ${product.oldPrice ? `<span class="old-price">${product.oldPrice} ₽</span>` : ''}
+                            </div>
+                            <button class="btn-add" id="btn-${product.id}" onclick="event.stopPropagation(); addToCart(${product.id})">
+                                В корзину
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ===== ФИЛЬТРАЦИЯ =====
+        function filterProducts(category, btn) {
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderProducts(category);
+        }
+
+        // ===== МОДАЛЬНОЕ ОКНО ТОВАРА =====
+        function openProductModal(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            
+            currentModalProduct = product;
+            document.getElementById('modal-image').src = product.image;
+            document.getElementById('modal-image').alt = product.name;
+            document.getElementById('modal-title').textContent = product.name;
+            document.getElementById('modal-desc').textContent = product.desc;
+            document.getElementById('modal-price').textContent = `${product.price} ₽`;
+            document.getElementById('modal-details').innerHTML = `
+                <p><strong>Вес:</strong> ${product.weight}</p>
+                <p><strong>Описание:</strong> ${product.details}</p>
+            `;
+            document.getElementById('product-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.remove('active');
+            document.body.style.overflow = '';
+            currentModalProduct = null;
+        }
+
+        function closeModalOutside(event) {
+            if (event.target === document.getElementById('product-modal')) {
+                closeProductModal();
+            }
+        }
+
+        function addToCartFromModal() {
+            if (currentModalProduct) {
+                addToCart(currentModalProduct.id);
+                closeProductModal();
+            }
+        }
+
+        // ===== КОРЗИНА =====
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existingItem = cart.find(item => item.id === id);
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCart();
+            showNotification(`${product.name} добавлен! 🎉`);
+            
+            const btn = document.getElementById(`btn-${id}`);
+            if (btn) {
+                btn.textContent = "✓ Добавлено";
+                btn.classList.add('added');
+                setTimeout(() => {
+                    btn.textContent = "В корзину";
+                    btn.classList.remove('added');
+                }, 1500);
+            }
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            const cartCount = document.getElementById('cart-count');
+            const cartFooter = document.getElementById('cart-footer');
+            const totalPrice = document.getElementById('total-price');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="empty-cart">Корзина пуста 🥺<br>Добавьте что-нибудь вкусное!</div>';
+                cartFooter.style.display = 'none';
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-img" onerror="this.style.display='none'">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">${item.price} ₽ × ${item.quantity}</div>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button class="qty-btn" onclick="changeQuantity(${item.id}, -1)">−</button>
+                            <span>${item.quantity}</span>
+                            <button class="qty-btn" onclick="changeQuantity(${item.id}, 1)">+</button>
+                            <button class="remove-item" onclick="removeFromCart(${item.id})">🗑️</button>
+                        </div>
+                    </div>
+                `).join('');
+                cartFooter.style.display = 'block';
+            }
+
+            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            totalPrice.textContent = `${total} ₽`;
+        }
+
+        function changeQuantity(id, delta) {
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    removeFromCart(id);
+                } else {
+                    updateCart();
+                }
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCart();
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-overlay').classList.toggle('active');
+            document.body.style.overflow = document.getElementById('cart-overlay').classList.contains('active') ? 'hidden' : '';
+        }
+
+        function closeCartOutside(event) {
+            if (event.target === document.getElementById('cart-overlay')) {
+                toggleCart();
+            }
+        }
+
+        function checkout() {
+            if (cart.length === 0) return;
+            
+            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const itemsList = cart.map(item => `• ${item.name} × ${item.quantity} = ${item.price * item.quantity} ₽`).join('\n');
+            
+            alert(`🎉 Заказ оформлен!\n\n${itemsList}\n\n💰 Итого: ${total} ₽\n\nСпасибо за покупку! Мы свяжемся с вами для подтверждения.`);
+            cart = [];
+            updateCart();
+            toggleCart();
+        }
+
+        // ===== ОТЗЫВЫ =====
+        function renderReviews() {
+            const grid = document.getElementById('reviews-grid');
+            grid.innerHTML = reviews.map(review => `
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="${review.avatar}" alt="${review.name}" class="review-avatar" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 50 50%22><circle cx=%2225%22 cy=%2225%22 r=%2225%22 fill=%22%23FF6B6B%22/><text x=%2225%22 y=%2232%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2220%22 font-weight=%22bold%22>${review.name.charAt(0)}</text></svg>'">
+                        <div class="review-info">
+                            <h4>${review.name}</h4>
+                            <div class="review-stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+                        </div>
+                    </div>
+                    <p class="review-text">"${review.text}"</p>
+                    <span class="review-product">${review.product}</span>
+                    <div class="review-date">${review.date}</div>
+                </div>
+            `).join('');
+        }
+
+        function populateProductSelect() {
+            const select = document.getElementById('review-product');
+            select.innerHTML = '<option value="">Выберите товар...</option>' +
+                products.map(p => `<option value="${p.name}">${p.name}</option>`).join('');
+        }
+
+        function setRating(rating) {
+            currentRating = rating;
+            document.getElementById('review-rating').value = rating;
+            const stars = document.querySelectorAll('#star-rating span');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        function submitReview(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('review-name').value;
+            const product = document.getElementById('review-product').value;
+            const text = document.getElementById('review-text').value;
+            
+            if (!product) {
+                showNotification('Выберите товар! ⚠️');
+                return;
+            }
+
+            // Для новых отзывов используем img26.png как аватар по умолчанию
+            const newReview = {
+                id: reviews.length + 1,
+                name: name,
+                rating: currentRating,
+                product: product,
+                text: text,
+                date: new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }),
+                avatar: "img26.png"
+            };
+
+            reviews.unshift(newReview);
+            renderReviews();
+            
+            document.getElementById('review-form').reset();
+            setRating(5);
+            
+            showNotification('Отзыв добавлен! Спасибо! ⭐');
+        }
+
+        // ===== УВЕДОМЛЕНИЯ =====
+        function showNotification(text) {
+            const notification = document.getElementById('notification');
+            notification.textContent = text;
+            notification.classList.add('show');
+            setTimeout(() => notification.classList.remove('show'), 3000);
+        }
+
+        // ===== ПЛАВНАЯ ПРОКРУТКА =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Инициализация звёзд
+        setRating(5);
+    </script>
+
+    <!-- Яндекс Карты API -->
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script type="text/javascript">
+        // Инициализация Яндекс Карты
+        ymaps.ready(init);
+
+        function init() {
+            // Координаты ул. Пражская, 4, Санкт-Петербург
+            var myMap = new ymaps.Map("yandex-map", {
+                center: [59.8788, 30.3890],
+                zoom: 16,
+                controls: ['zoomControl', 'typeSelector']
+            });
+
+            // Метка на карте
+            var myPlacemark = new ymaps.Placemark([59.8788, 30.3890], {
+                balloonContentHeader: '<strong>Плюшки от Илюшки</strong>',
+                balloonContentBody: 'Санкт-Петербург, ул. Пражская, 4',
+                balloonContentFooter: '🕐 Ежедневно 9:00–21:00',
+                hintContent: 'Плюшки от Илюшки'
+            }, {
+                preset: 'islands#redDotIcon',
+                iconColor: '#FF6B6B'
+            });
+
+            myMap.geoObjects.add(myPlacemark);
+
+            // Открываем балун по умолчанию
+            myPlacemark.balloon.open();
+        }
+    </script>
+</body>
+</html>
